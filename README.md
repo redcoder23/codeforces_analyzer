@@ -31,6 +31,13 @@ A powerful web application to track, analyze, and visualize your Codeforces comp
 - **Real-Time Sync** - Auto-sync with Codeforces API
 - **Smooth Navigation** - Intuitive single-page application
 
+- <img width="1913" height="879" alt="image" src="https://github.com/user-attachments/assets/1e1b5b5c-45b3-46f8-872e-77a2c48cae8d" />
+<img width="1894" height="872" alt="image" src="https://github.com/user-attachments/assets/9e09c99c-659d-40ce-b39c-fef755f38ee5" />
+<img width="1914" height="884" alt="image" src="https://github.com/user-attachments/assets/5a8e9c06-8a36-4854-9c3b-86e579d829f6" />
+<img width="1893" height="876" alt="image" src="https://github.com/user-attachments/assets/c0871e63-69b5-4efa-91c9-5fc239fcb6fb" />
+<img width="1864" height="854" alt="image" src="https://github.com/user-attachments/assets/e8456543-949b-48f2-990e-f51aa175214d" />
+
+
 ## 🚀 Quick Start
 
 ### Prerequisites
