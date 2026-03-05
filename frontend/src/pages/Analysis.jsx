@@ -12,7 +12,7 @@ function fmtDate(unix) {
   return new Date(unix * 1000).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 }
 
-// Minimal bar chart using SVG
+
 function BarChart({ data }) {
   if (!data.length) return null;
   const maxCount = Math.max(...data.map((d) => d.count), 1);
@@ -52,7 +52,7 @@ function BarChart({ data }) {
   );
 }
 
-// Donut-style pie chart using SVG
+
 function PieChart({ data, totalProblems }) {
   const top = data.slice(0, 12);
   const total = top.reduce((s, d) => s + d.count, 0);
@@ -151,7 +151,7 @@ export default function Analysis() {
     );
   });
 
-  // Sort problems by rating (highest first)
+
   const sortedProblems = [...filteredProblems].sort((a, b) => (b.rating || 0) - (a.rating || 0));
 
   const handleExport = async () => {
@@ -201,7 +201,7 @@ export default function Analysis() {
     <div style={styles.root}>
       <div style={styles.grid} />
       <div style={styles.container}>
-        {/* Header */}
+       
         <div style={styles.header}>
           <button style={styles.backBtn} onClick={() => navigate(`/ratings/${handle}`)}>← Ratings</button>
           <div>
@@ -409,7 +409,6 @@ const styles = {
   },
   chartTitle: { fontSize: 13, color: "#5a7a8a", fontFamily: "'Space Mono', monospace", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 20 },
 
-  // Problems Card Styles
   problemsCard: {
     background: "rgba(255,255,255,0.025)",
     border: "1px solid rgba(255,255,255,0.07)",
@@ -448,7 +447,7 @@ const styles = {
     minWidth: 200,
   },
 
-  // Problems Table
+  
   problemsTableWrapper: {
     marginBottom: 20,
     border: "1px solid rgba(255,255,255,0.07)",
@@ -502,7 +501,7 @@ const styles = {
     whiteSpace: "nowrap",
   },
 
-  // Download Buttons
+  
   downloadButtonsRow: {
     display: "flex",
     gap: 12,

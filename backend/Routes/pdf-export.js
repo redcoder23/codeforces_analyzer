@@ -18,48 +18,44 @@ async function pdfExportHandler(req, res) {
             first_solved_time: { $gte: fromTs, $lte: toTs }
         }).sort({ rating: -1 });
 
-        // Sort by rating (descending)
+    
         const sortedProblems = problems.sort((a, b) => (b.rating || 0) - (a.rating || 0));
 
-        // Create PDF document
         const doc = new PDFDocument({
             size: 'A4',
             margin: 40,
             bufferPages: true
         });
 
-        // Set response headers
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', `attachment; filename="${handle}_problems_${from}_${to}.pdf"`);
 
-        // Pipe to response
         doc.pipe(res);
 
-        // Title
+        
         doc.fontSize(24).font('Helvetica-Bold').text(`Codeforces Problems - ${handle}`, { align: 'center' });
         doc.fontSize(10).font('Helvetica').text(`Date Range: ${new Date(fromTs * 1000).toLocaleDateString()} - ${new Date(toTs * 1000).toLocaleDateString()}`, { align: 'center' });
         doc.moveDown(0.5);
 
-        // Stats
+    
         doc.fontSize(11).font('Helvetica-Bold').text(`Total Problems: ${problems.length}`, { align: 'left' });
         doc.moveDown(0.3);
 
-        // Table headers
+        
         const pageWidth = doc.page.width - 80;
-        const col1Width = 100; // Problem
-        const col2Width = 80;  // Rating
-        const col3Width = pageWidth - col1Width - col2Width; // Tags
+        const col1Width = 100;
+        const col2Width = 80;  
+        const col3Width = pageWidth - col1Width - col2Width; 
 
         doc.fontSize(9).font('Helvetica-Bold');
         doc.text('Problem', 40, doc.y, { width: col1Width });
         doc.text('Rating', 40 + col1Width, doc.y - 14, { width: col2Width });
         doc.text('Tags', 40 + col1Width + col2Width, doc.y - 14, { width: col3Width });
 
-        // Draw line
+        
         doc.moveTo(40, doc.y + 2).lineTo(pageWidth + 40, doc.y + 2).stroke();
         doc.moveDown(0.5);
 
-        // Add problems
         sortedProblems.forEach((p, idx) => {
             const [contestId, index] = (p.problemkey || '').split('-');
             const url = contestId && index ? `https://codeforces.com/problemset/problem/${contestId}/${index}` : '';
@@ -68,7 +64,6 @@ async function pdfExportHandler(req, res) {
             const startY = doc.y;
             doc.fontSize(8).font('Helvetica');
 
-            // Problem (with URL)
             if (url) {
                 doc.fillColor('#0066CC').text(p.problemkey, 40, startY, { 
                     width: col1Width,
@@ -79,27 +74,25 @@ async function pdfExportHandler(req, res) {
                 doc.text(p.problemkey, 40, startY, { width: col1Width });
             }
 
-            // Rating
+           
             const ratingColor = getRatingColor(p.rating);
             doc.fillColor(ratingColor);
             doc.text(p.rating || 'Unrated', 40 + col1Width, startY, { width: col2Width, align: 'center' });
             doc.fillColor('#000000');
 
-            // Tags
+            
             doc.text(tags, 40 + col1Width + col2Width, startY, { 
                 width: col3Width,
                 continued: false
             });
 
-            // Add separator line
             const rowHeight = Math.max(14, doc.y - startY);
             doc.moveTo(40, doc.y + 2).lineTo(pageWidth + 40, doc.y + 2).stroke();
             doc.moveDown(0.3);
 
-            // Check if we need a new page
             if (doc.y > doc.page.height - 60) {
                 doc.addPage();
-                // Repeat headers on new page
+
                 doc.fontSize(9).font('Helvetica-Bold');
                 doc.text('Problem', 40, doc.y, { width: col1Width });
                 doc.text('Rating', 40 + col1Width, doc.y - 14, { width: col2Width });
@@ -109,7 +102,6 @@ async function pdfExportHandler(req, res) {
             }
         });
 
-        // Footer with summary
         doc.moveTo(40, doc.page.height - 60).lineTo(pageWidth + 40, doc.page.height - 60).stroke();
         doc.fontSize(8).font('Helvetica').text(`Generated: ${new Date().toLocaleString()}`, 40, doc.page.height - 50);
 

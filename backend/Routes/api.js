@@ -83,7 +83,7 @@ router.get('/analysis/:handle', async (req, res) => {
             .map(([rating, count]) => ({ rating, count }))
             .sort((a, b) => (parseInt(a.rating) || 0) - (parseInt(b.rating) || 0));
 
-        // Tag distribution for pie chart
+        
         const tagBuckets = {};
         for (const p of problems) {
             for (const tag of (p.tags || [])) {

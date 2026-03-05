@@ -1,5 +1,3 @@
-// Add this to your routes/api.js OR as a separate file
-// Requires: npm install exceljs
 
 const ExcelJS = require('exceljs');
 const firstsolve = require('../Models/Firstsolve');
@@ -101,7 +99,6 @@ async function exportHandler(req, res) {
             to: { row: 1, column: 5 }
         };
 
-        // Send response
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         res.setHeader('Content-Disposition', `attachment; filename="${handle}_problems.xlsx"`);
 

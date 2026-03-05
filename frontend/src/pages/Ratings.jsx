@@ -3,18 +3,18 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
 
-// Exact Codeforces rank colors
+
 const RANK_COLORS = {
-  Newbie: "#cccccc",           // Gray
-  Pupil: "#77dd77",            // Light Green
-  Specialist: "#77ddbb",       // Cyan/Teal
-  Expert: "#aaaaff",           // Light Blue
-  "Candidate Master": "#ff88ff", // Magenta/Purple
-  Master: "#ffcc88",           // Orange
-  "International Master": "#ffbb55", // Dark Orange
-  GrandMaster: "#ff3333",      // Red
-  "International GrandMaster": "#ff0000", // Bright Red
-  "Legendary GrandMaster": "#aa0000", // Dark Red
+  Newbie: "#cccccc",           
+  Pupil: "#77dd77",            
+  Specialist: "#77ddbb",       
+  Expert: "#aaaaff",           
+  "Candidate Master": "#ff88ff", 
+  Master: "#ffcc88",          
+  "International Master": "#ffbb55", 
+  GrandMaster: "#ff3333",     
+  "International GrandMaster": "#ff0000", 
+  "Legendary GrandMaster": "#aa0000",
 };
 
 function rankColor(title) {
@@ -34,7 +34,6 @@ export default function Ratings() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Date range for analysis
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
 
@@ -74,7 +73,7 @@ export default function Ratings() {
       <div style={styles.grid} />
 
       <div style={styles.container}>
-        {/* Header */}
+       
         <div style={styles.header}>
           <button style={styles.backBtn} onClick={() => navigate("/")}>← Back</button>
           <div>
@@ -90,7 +89,6 @@ export default function Ratings() {
           </div>
         </div>
 
-        {/* Stats row */}
         {!loading && !error && (
           <div style={styles.statsRow}>
             {[
@@ -109,10 +107,10 @@ export default function Ratings() {
         {loading && <div style={styles.status}>Loading contest history…</div>}
         {error && <div style={{ ...styles.status, color: "#ff6b6b" }}>⚠ {error}</div>}
 
-        {/* Table and Analyze Section - Side by Side */}
+        
         {!loading && !error && (
           <div style={styles.contentRow}>
-            {/* Left Column - Table */}
+           
             <div style={styles.tableColumn}>
               <div style={styles.tableWrapper}>
                 <table style={styles.table}>
@@ -168,7 +166,6 @@ export default function Ratings() {
               </div>
             </div>
 
-            {/* Right Column - Analyze Section */}
             {ratings.length > 0 && (
               <div style={styles.analyzeColumn}>
                 <div style={styles.analyzeBar}>
@@ -324,7 +321,6 @@ const styles = {
     textAlign: "center",
   },
   
-  // Side-by-side layout
   contentRow: {
     display: "flex",
     gap: 20,
